@@ -1,0 +1,105 @@
+table agg_hospital_procedimento
+	lineageTag: 00481f18-ee10-4480-a2fe-1072390bf3e6
+
+	column CNES
+		dataType: string
+		isHidden
+		lineageTag: 70bdb76b-4608-467b-b9de-15635440201c
+		summarizeBy: none
+		sourceColumn: CNES
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodProcedimento
+		dataType: string
+		isHidden
+		lineageTag: 5d909576-574f-4e1a-80fb-7f8f4a0ea532
+		summarizeBy: none
+		sourceColumn: CodProcedimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cirurgias
+		dataType: int64
+		formatString: 0
+		lineageTag: 49b69edc-36b6-479d-b5e1-a0a258672d35
+		summarizeBy: sum
+		sourceColumn: Cirurgias
+
+		annotation SummarizationSetBy = Automatic
+
+	column MediaPermanencia
+		dataType: double
+		lineageTag: f40f19dc-7ac0-4550-97b9-14ac9ec3ef76
+		summarizeBy: sum
+		sourceColumn: MediaPermanencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column MedianaPermanencia
+		dataType: double
+		lineageTag: bdb4dfb0-72ed-4199-8efd-1c74e1e3ca3f
+		summarizeBy: sum
+		sourceColumn: MedianaPermanencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column TaxaUTI
+		dataType: double
+		lineageTag: cb690285-fc27-42bb-a313-c38d3719e461
+		summarizeBy: sum
+		sourceColumn: TaxaUTI
+
+		annotation SummarizationSetBy = Automatic
+
+	column Obitos
+		dataType: int64
+		formatString: 0
+		lineageTag: 273879d6-fad2-4cee-bb84-6a43857c6365
+		summarizeBy: sum
+		sourceColumn: Obitos
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValorTotal
+		dataType: double
+		lineageTag: 460104b7-4fce-4cb8-b10d-c7300befa3e4
+		summarizeBy: sum
+		sourceColumn: ValorTotal
+
+		annotation SummarizationSetBy = Automatic
+
+	column MedianaPares
+		dataType: double
+		lineageTag: 5a7373b4-88d6-4d9f-9629-20b73bb0e771
+		summarizeBy: sum
+		sourceColumn: MedianaPares
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comparavel
+		dataType: int64
+		formatString: 0
+		lineageTag: 03e0525e-23d9-4ad8-9514-63ad4f84f7b3
+		summarizeBy: sum
+		sourceColumn: Comparavel
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiasExcedentes
+		dataType: double
+		lineageTag: 13150c3e-0d05-4ba0-be6f-8f78fbfbacd8
+		summarizeBy: sum
+		sourceColumn: DiasExcedentes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_hospital_procedimento = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "agg_hospital_procedimento.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Cabecalhos, {{"CNES", type text}, {"CodProcedimento", type text}, {"Cirurgias", Int64.Type}, {"MediaPermanencia", type number}, {"MedianaPermanencia", type number}, {"TaxaUTI", type number}, {"Obitos", Int64.Type}, {"ValorTotal", type number}, {"MedianaPares", type number}, {"Comparavel", Int64.Type}, {"DiasExcedentes", type number}}, "en-US")
+				in
+				    Tipos

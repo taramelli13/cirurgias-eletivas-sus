@@ -1,0 +1,104 @@
+table dim_procedimento
+	lineageTag: 130965f6-d05c-4764-a381-ae017c964386
+
+	column CodProcedimento
+		dataType: string
+		lineageTag: d5241b01-d1bf-4396-b96d-879fbd739c76
+		summarizeBy: none
+		sourceColumn: CodProcedimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Procedimento
+		dataType: string
+		lineageTag: 202fc2ea-7599-4df7-8045-0d504ec8be20
+		summarizeBy: none
+		sourceColumn: Procedimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column PermanenciaSIGTAP
+		dataType: double
+		lineageTag: cff2c887-14ef-4725-a20d-cc85ed5b3b62
+		summarizeBy: sum
+		sourceColumn: PermanenciaSIGTAP
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subgrupo
+		dataType: string
+		lineageTag: ca9ee368-e7c7-480e-9ded-56714f28a997
+		summarizeBy: none
+		sourceColumn: Subgrupo
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormaOrganizacao
+		dataType: string
+		lineageTag: 416e0be1-c44c-43d9-9f2b-027d0cafc36a
+		summarizeBy: none
+		sourceColumn: FormaOrganizacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column Grupo
+		dataType: string
+		lineageTag: f00b1122-1b04-433b-b0e2-1269085130bc
+		summarizeBy: none
+		sourceColumn: Grupo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cirurgias
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a14caef-6503-4901-8a28-8685ac3374a1
+		summarizeBy: sum
+		sourceColumn: Cirurgias
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hospitais
+		dataType: int64
+		formatString: 0
+		lineageTag: 9fc3e421-7436-4a73-bf57-8bbad08604a5
+		summarizeBy: sum
+		sourceColumn: Hospitais
+
+		annotation SummarizationSetBy = Automatic
+
+	column ElegivelBenchmark
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ffc4e8e-153a-4abc-b856-5cbbfcaee814
+		summarizeBy: sum
+		sourceColumn: ElegivelBenchmark
+
+		annotation SummarizationSetBy = Automatic
+
+	column MedianaPares
+		dataType: double
+		lineageTag: 3777b7e8-21a2-4ba7-9cba-18caa557986c
+		summarizeBy: sum
+		sourceColumn: MedianaPares
+
+		annotation SummarizationSetBy = Automatic
+
+	column HospitaisComparados
+		dataType: int64
+		formatString: 0
+		lineageTag: afea8573-3941-4fe6-9a2c-acadd7b1eff1
+		summarizeBy: sum
+		sourceColumn: HospitaisComparados
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_procedimento = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "dim_procedimento.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Cabecalhos, {{"CodProcedimento", type text}, {"Procedimento", type text}, {"PermanenciaSIGTAP", type number}, {"Subgrupo", type text}, {"FormaOrganizacao", type text}, {"Grupo", type text}, {"Cirurgias", Int64.Type}, {"Hospitais", Int64.Type}, {"ElegivelBenchmark", Int64.Type}, {"MedianaPares", type number}, {"HospitaisComparados", Int64.Type}}, "en-US")
+				in
+				    Tipos

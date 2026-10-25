@@ -1,0 +1,50 @@
+table dim_calendario
+	lineageTag: e69e4208-473a-48cb-a600-8ae84dc90078
+
+	column Competencia
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 28b7eba3-54e5-49b1-b1a5-db2a9a70a900
+		summarizeBy: none
+		sourceColumn: Competencia
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: f3236aa9-b35b-451b-ab5c-ffd238f65012
+		summarizeBy: sum
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNum
+		dataType: int64
+		formatString: 0
+		lineageTag: bf1fcefe-425a-408a-96f7-170bfc67e621
+		summarizeBy: sum
+		sourceColumn: MesNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		dataType: string
+		lineageTag: d52b8ce7-a9cf-480e-bbf6-5f119815c4e0
+		summarizeBy: none
+		sourceColumn: Mes
+		sortByColumn: MesNum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_calendario = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "dim_calendario.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Cabecalhos, {{"Competencia", type date}, {"Ano", Int64.Type}, {"MesNum", Int64.Type}, {"Mes", type text}}, "en-US")
+				in
+				    Tipos

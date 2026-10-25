@@ -1,0 +1,36 @@
+table dim_hospital
+	lineageTag: 1e442568-4ae9-40c1-b46b-0cd17c47d118
+
+	column CNES
+		dataType: string
+		lineageTag: dba957ad-2f72-4faa-852b-3375eb5f9445
+		summarizeBy: none
+		sourceColumn: CNES
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hospital
+		dataType: string
+		lineageTag: f0402906-808c-4754-912d-77f24360dfe3
+		summarizeBy: none
+		sourceColumn: Hospital
+
+		annotation SummarizationSetBy = Automatic
+
+	column Municipio
+		dataType: string
+		lineageTag: adc4404b-1014-4a30-9394-5a43fb79c765
+		summarizeBy: none
+		sourceColumn: Municipio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_hospital = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "dim_hospital.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Cabecalhos, {{"CNES", type text}, {"Hospital", type text}, {"Municipio", type text}}, "en-US")
+				in
+				    Tipos

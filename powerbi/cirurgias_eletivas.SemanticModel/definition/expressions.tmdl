@@ -1,0 +1,4 @@
+expression PastaDados = "C:\Users\ygor_\OneDrive\Área de Trabalho\Projeto\sus-cirurgias-eletivas\powerbi\data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c4aed2e1-e22f-4d23-aee8-ab369179a697
+
+	annotation PBI_ResultType = Text

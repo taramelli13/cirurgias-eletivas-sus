@@ -1,0 +1,19 @@
+relationship da9f9493-13fe-4713-a47d-213aa6943060
+	fromColumn: fato_cirurgias.CNES
+	toColumn: dim_hospital.CNES
+
+relationship bcdc38a3-244c-4807-b60f-51b37369336c
+	fromColumn: fato_cirurgias.CodProcedimento
+	toColumn: dim_procedimento.CodProcedimento
+
+relationship 26d4f74f-4e9a-4666-ad05-8f23553f29f1
+	fromColumn: fato_cirurgias.Competencia
+	toColumn: dim_calendario.Competencia
+
+relationship f703f6f5-d60c-482e-8070-674be6fc95ea
+	fromColumn: agg_hospital_procedimento.CNES
+	toColumn: dim_hospital.CNES
+
+relationship 9befcbd2-61bf-4a94-b58b-848224ea6e00
+	fromColumn: agg_hospital_procedimento.CodProcedimento
+	toColumn: dim_procedimento.CodProcedimento

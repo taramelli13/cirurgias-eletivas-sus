@@ -1,0 +1,190 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "tHospitais",
+  "position": {
+    "x": 740,
+    "y": 110,
+    "z": 0,
+    "height": 950,
+    "width": 1160,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_hospital"
+                    }
+                  },
+                  "Property": "Hospital"
+                }
+              },
+              "queryRef": "dim_hospital.Hospital",
+              "nativeQueryRef": "Hospital"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_hospital"
+                    }
+                  },
+                  "Property": "Municipio"
+                }
+              },
+              "queryRef": "dim_hospital.Municipio",
+              "nativeQueryRef": "Municipio"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Leitos-dia Excedentes"
+                }
+              },
+              "queryRef": "_Medidas.Leitos-dia Excedentes",
+              "nativeQueryRef": "Leitos-dia Excedentes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Cirurgias"
+                }
+              },
+              "queryRef": "_Medidas.Cirurgias",
+              "nativeQueryRef": "Cirurgias"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Permanência Média"
+                }
+              },
+              "queryRef": "_Medidas.Permanência Média",
+              "nativeQueryRef": "Permanência Média"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Taxa UTI"
+                }
+              },
+              "queryRef": "_Medidas.Taxa UTI",
+              "nativeQueryRef": "Taxa UTI"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "% Alta Complexidade"
+                }
+              },
+              "queryRef": "_Medidas.% Alta Complexidade",
+              "nativeQueryRef": "% Alta Complexidade"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Idade Média"
+                }
+              },
+              "queryRef": "_Medidas.Idade Média",
+              "nativeQueryRef": "Idade Média"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Taxa Óbito"
+                }
+              },
+              "queryRef": "_Medidas.Taxa Óbito",
+              "nativeQueryRef": "Taxa Óbito"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Leitos-dia Excedentes"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Excedente ao lado do perfil de risco do paciente'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

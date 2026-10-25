@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "c4",
+  "position": {
+    "x": 1284,
+    "y": 110,
+    "z": 0,
+    "height": 130,
+    "width": 300,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "card",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Leitos-dia Excedentes"
+                }
+              },
+              "queryRef": "_Medidas.Leitos-dia Excedentes",
+              "nativeQueryRef": "Leitos-dia Excedentes"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

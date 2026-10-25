@@ -1,0 +1,72 @@
+table _Medidas
+	lineageTag: 4322a392-8bdc-42b7-b212-e6a153b24b1c
+
+	measure Cirurgias = COUNTROWS ( fato_cirurgias )
+		formatString: #,0
+		lineageTag: 114d98eb-b4c7-4aec-8d3b-c794a8fb8fe8
+
+	measure Hospitais = DISTINCTCOUNT ( fato_cirurgias[CNES] )
+		formatString: #,0
+		lineageTag: 1845e38c-fb78-4a5e-b1c3-42e7cc3e241c
+
+	measure 'Valor SUS' = SUM ( fato_cirurgias[ValorTotal] )
+		formatString: \R\$ #,0
+		lineageTag: 39a30e39-5eb4-4c6a-a925-a169bbee2e46
+
+	measure 'Leitos-dia' = SUM ( fato_cirurgias[DiasPermanencia] )
+		formatString: #,0
+		lineageTag: 33a121b8-3e23-420b-a9f8-dfe752decd3d
+
+	measure 'Permanência Média' = AVERAGE ( fato_cirurgias[DiasPermanencia] )
+		formatString: #,0.00
+		lineageTag: a98f25fe-fdfb-4fbb-9a00-9718d9f8c60f
+
+	measure 'Taxa UTI' = AVERAGE ( fato_cirurgias[UsouUTI] )
+		formatString: 0.0%
+		lineageTag: 9d362a49-54b5-4bad-8bc1-005d1f83184e
+
+	measure 'Taxa Óbito' = AVERAGE ( fato_cirurgias[Obito] )
+		formatString: 0.00%
+		lineageTag: 44377ff7-00c0-4ce1-9a72-37378b3e0f12
+
+	measure 'Idade Média' = AVERAGE ( fato_cirurgias[Idade] )
+		formatString: #,0.0
+		lineageTag: e0d68982-7e13-4511-a6e0-69ce186b16d3
+
+	measure '% Alta Complexidade' = DIVIDE ( CALCULATE ( COUNTROWS ( fato_cirurgias ), fato_cirurgias[Complexidade] = "Alta" ), [Cirurgias] )
+		formatString: 0.0%
+		lineageTag: c594db1c-a285-4718-ada5-1035827eb07e
+
+	measure 'Leitos-dia Excedentes' = SUM ( agg_hospital_procedimento[DiasExcedentes] )
+		formatString: #,0
+		lineageTag: 318adbce-93a9-43d2-b67d-0439571a645c
+
+	measure 'Leitos Equivalentes' = DIVIDE ( [Leitos-dia Excedentes], 365 )
+		formatString: #,0
+		lineageTag: 9db8fbd1-1f51-433b-9f5d-2547a2289f91
+
+	measure 'Permanência Média (Hospital)' = CALCULATE ( DIVIDE ( SUMX ( agg_hospital_procedimento, agg_hospital_procedimento[MediaPermanencia] * agg_hospital_procedimento[Cirurgias] ), SUM ( agg_hospital_procedimento[Cirurgias] ) ), agg_hospital_procedimento[Comparavel] = 1 )
+		formatString: #,0.00
+		lineageTag: 8c7dc143-5d45-422e-a8ee-06ab02a89456
+
+	measure 'Mediana dos Pares' = AVERAGE ( dim_procedimento[MedianaPares] )
+		formatString: #,0.00
+		lineageTag: 7d503030-18ca-4e27-b39b-8f6aaf9498c4
+
+	measure 'Permanência SIGTAP' = AVERAGE ( dim_procedimento[PermanenciaSIGTAP] )
+		formatString: #,0
+		lineageTag: 2d6dfcbf-0167-4d09-b0fc-a45aab55598f
+
+	measure 'Hospitais Acima do Padrão' = COUNTROWS ( FILTER ( agg_hospital_procedimento, agg_hospital_procedimento[Comparavel] = 1 && agg_hospital_procedimento[MediaPermanencia] > agg_hospital_procedimento[MedianaPares] ) )
+		formatString: #,0
+		lineageTag: cb4c9261-dd88-452a-9733-83d16a01f3b0
+
+	column x
+		isHidden
+		lineageTag: bf4ad235-80b6-4785-b8f2-804d1f02ed3d
+		isNameInferred
+		sourceColumn: [x]
+
+	partition _Medidas = calculated
+		mode: import
+		source = ROW ( "x", BLANK () )

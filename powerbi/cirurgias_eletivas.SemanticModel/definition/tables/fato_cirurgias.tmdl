@@ -1,0 +1,139 @@
+table fato_cirurgias
+	lineageTag: 09688fae-a860-4d1a-89c9-76dbb7b35a9f
+
+	column NumAIH
+		dataType: string
+		isHidden
+		lineageTag: c92c0276-6ac3-4f9a-8974-26f747af2d97
+		summarizeBy: none
+		sourceColumn: NumAIH
+
+		annotation SummarizationSetBy = Automatic
+
+	column Competencia
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		isHidden
+		lineageTag: 64d30a7c-605a-40b6-a4c4-7f2dab371a0a
+		summarizeBy: none
+		sourceColumn: Competencia
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column DataInternacao
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 93f9bb37-666a-47e3-a5bd-a8c1d7df512b
+		summarizeBy: none
+		sourceColumn: DataInternacao
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column CNES
+		dataType: string
+		isHidden
+		lineageTag: 3ec97b72-a75f-4f21-a875-be6f0d928fb1
+		summarizeBy: none
+		sourceColumn: CNES
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodProcedimento
+		dataType: string
+		isHidden
+		lineageTag: 7a44ea83-6684-43c0-8eed-c55b568a95d2
+		summarizeBy: none
+		sourceColumn: CodProcedimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column CID
+		dataType: string
+		lineageTag: 5e55f61a-21b5-4e5f-95fc-1883fab92be8
+		summarizeBy: none
+		sourceColumn: CID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Complexidade
+		dataType: string
+		lineageTag: ca962d33-b8db-47b2-a17d-89a5a61152fd
+		summarizeBy: none
+		sourceColumn: Complexidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiasPermanencia
+		dataType: int64
+		formatString: 0
+		lineageTag: 192b8a2a-3c26-44e1-b3c0-87bc0764ba0b
+		summarizeBy: sum
+		sourceColumn: DiasPermanencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiasUTI
+		dataType: int64
+		formatString: 0
+		lineageTag: b622c485-aa6c-475d-beab-184c37b018d4
+		summarizeBy: sum
+		sourceColumn: DiasUTI
+
+		annotation SummarizationSetBy = Automatic
+
+	column UsouUTI
+		dataType: int64
+		formatString: 0
+		lineageTag: adba02cd-2f36-4485-bec9-c8baa4263a47
+		summarizeBy: sum
+		sourceColumn: UsouUTI
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValorTotal
+		dataType: double
+		lineageTag: 0e5ce6b2-d0f0-41d6-917b-5da0a3c9ebd4
+		summarizeBy: sum
+		sourceColumn: ValorTotal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Obito
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ff22962-a699-47fd-9036-6138b0968949
+		summarizeBy: sum
+		sourceColumn: Obito
+
+		annotation SummarizationSetBy = Automatic
+
+	column Idade
+		dataType: int64
+		formatString: 0
+		lineageTag: c4b174b8-a4a6-4bbd-a08a-4f2d9975c7c6
+		summarizeBy: sum
+		sourceColumn: Idade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sexo
+		dataType: string
+		lineageTag: 2f327f7a-ad2d-49c2-b1af-58c2eecf6796
+		summarizeBy: none
+		sourceColumn: Sexo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fato_cirurgias = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "fato_cirurgias.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Cabecalhos, {{"NumAIH", type text}, {"Competencia", type date}, {"DataInternacao", type date}, {"CNES", type text}, {"CodProcedimento", type text}, {"CID", type text}, {"Complexidade", type text}, {"DiasPermanencia", Int64.Type}, {"DiasUTI", Int64.Type}, {"UsouUTI", Int64.Type}, {"ValorTotal", type number}, {"Obito", Int64.Type}, {"Idade", Int64.Type}, {"Sexo", type text}}, "en-US")
+				in
+				    Tipos

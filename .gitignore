@@ -1,0 +1,13 @@
+# Ambiente
+.venv/
+__pycache__/
+*.pyc
+
+# Dados (públicos, reproduzidos pelos scripts)
+/data/
+/powerbi/data/
+
+# Arquivos locais do Power BI
+*.pbix
+**/.pbi/cache.abf
+**/.pbi/localSettings.json

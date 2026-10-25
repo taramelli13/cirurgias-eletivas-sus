@@ -1,0 +1,138 @@
+{
+  "name": "Fin-X SUS",
+  "dataColors": [
+    "#005DA6",
+    "#4EC7F5",
+    "#001D3D",
+    "#64BED9",
+    "#54595F",
+    "#9FB3C8",
+    "#F2A541",
+    "#D1495B"
+  ],
+  "foreground": "#001D3D",
+  "foregroundNeutralSecondary": "#54595F",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F4F8FB",
+  "tableAccent": "#005DA6",
+  "textClasses": {
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 28,
+      "color": "#001D3D"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#001D3D"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#001D3D"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#54595F"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E7E7E7"
+              }
+            },
+            "radius": 10
+          }
+        ],
+        "padding": [
+          {
+            "top": 10,
+            "bottom": 10,
+            "left": 14,
+            "right": 14
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F4F8FB"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F4F8FB"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "textbox": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#005DA6"
+              }
+            },
+            "fontSize": 26
+          }
+        ],
+        "categoryLabels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#54595F"
+              }
+            },
+            "fontSize": 11
+          }
+        ]
+      }
+    }
+  }
+}

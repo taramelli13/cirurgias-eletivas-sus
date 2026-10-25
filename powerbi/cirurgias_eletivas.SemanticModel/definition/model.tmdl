@@ -1,0 +1,18 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["PastaDados", "fato_cirurgias", "agg_hospital_procedimento", "dim_procedimento", "dim_hospital", "dim_calendario"]
+
+ref table fato_cirurgias
+ref table agg_hospital_procedimento
+ref table dim_procedimento
+ref table dim_hospital
+ref table dim_calendario
+ref table _Medidas
