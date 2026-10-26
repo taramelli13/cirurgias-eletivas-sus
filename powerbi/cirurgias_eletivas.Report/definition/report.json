@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
   "themeCollection": {
     "customTheme": {
-      "name": "FinX_SUS.json",
+      "name": "Tema_SUS.json",
       "reportVersionAtImport": {
         "visual": "2.14.0",
         "report": "3.4.0",
@@ -17,8 +17,8 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "FinX_SUS.json",
-          "path": "FinX_SUS.json",
+          "name": "Tema_SUS.json",
+          "path": "Tema_SUS.json",
           "type": "CustomTheme"
         }
       ]

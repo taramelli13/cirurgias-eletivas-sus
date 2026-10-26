@@ -17,7 +17,7 @@ NOME = 'cirurgias_eletivas'
 MODEL_PATH = POWERBI_PATH / f'{NOME}.SemanticModel'
 REPORT_PATH = POWERBI_PATH / f'{NOME}.Report'
 
-# Cores da identidade visual da Fin-X (finxapp.com.br)
+# Paleta do painel: tons de azul-marinho e ciano, com laranja para alertas
 CORES = {
     'marinho': '#001D3D', 'azul': '#005DA6', 'ciano': '#4EC7F5', 'azul_claro': '#64BED9',
     'cinza': '#54595F', 'cinza_claro': '#E7E7E7', 'fundo': '#F4F8FB', 'branco': '#FFFFFF',
@@ -334,7 +334,7 @@ def paginas():
 def tema():
     fonte, fonte_negrito = 'Segoe UI', 'Segoe UI Semibold'
     return {
-        'name': 'Fin-X SUS',
+        'name': 'Tema SUS',
         'dataColors': [CORES['azul'], CORES['ciano'], CORES['marinho'], CORES['azul_claro'],
                        CORES['cinza'], '#9FB3C8', '#F2A541', '#D1495B'],
         'foreground': CORES['marinho'], 'foregroundNeutralSecondary': CORES['cinza'],
@@ -378,15 +378,15 @@ def gerar_relatorio():
 
     recursos = REPORT_PATH / 'StaticResources'
     (recursos / 'RegisteredResources').mkdir(parents=True)
-    escrever(recursos / 'RegisteredResources' / 'FinX_SUS.json', json.dumps(tema(), indent=2, ensure_ascii=False))
+    escrever(recursos / 'RegisteredResources' / 'Tema_SUS.json', json.dumps(tema(), indent=2, ensure_ascii=False))
 
     versao = {'visual': '2.14.0', 'report': '3.4.0', 'page': '2.3.1'}
     escrever(definicao / 'report.json', json.dumps({
         '$schema': 'https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json',
-        'themeCollection': {'customTheme': {'name': 'FinX_SUS.json', 'reportVersionAtImport': versao,
+        'themeCollection': {'customTheme': {'name': 'Tema_SUS.json', 'reportVersionAtImport': versao,
                                             'type': 'RegisteredResources'}},
         'resourcePackages': [{'name': 'RegisteredResources', 'type': 'RegisteredResources',
-                              'items': [{'name': 'FinX_SUS.json', 'path': 'FinX_SUS.json', 'type': 'CustomTheme'}]}],
+                              'items': [{'name': 'Tema_SUS.json', 'path': 'Tema_SUS.json', 'type': 'CustomTheme'}]}],
         'settings': {'useStylableVisualContainerHeader': True, 'defaultDrillFilterOtherVisuals': True,
                      'allowChangeFilterTypes': True, 'useEnhancedTooltips': True,
                      'useDefaultAggregateDisplayName': True},
